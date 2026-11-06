@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dolarito · Tipo de cambio del dólar en Bolivia</title>
+  <meta name="description" content="Compara en tiempo real el tipo de cambio del dólar en los bancos de Bolivia y el oficial del BCB. Se actualiza automáticamente." />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0b1120" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/png" sizes="32x32" href="img/brand/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/brand/icon-192.png" />
+  <link rel="apple-touch-icon" href="img/brand/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script>
+    // Aplica el tema guardado antes de pintar para evitar parpadeo.
+    try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch {}
+  </script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <!-- Iconos (Lucide, licencia ISC) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+      <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+      <symbol id="i-landmark" viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M6 18v-7M10 18v-7M14 18v-7M18 18v-7"/><path d="M12 2 20 7H4z"/></symbol>
+      <symbol id="i-down" viewBox="0 0 24 24"><path d="M22 17 13.5 8.5l-5 5L2 7"/><path d="M16 17h6v-6"/></symbol>
+      <symbol id="i-up" viewBox="0 0 24 24"><path d="M22 7l-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
+      <symbol id="i-spread" viewBox="0 0 24 24"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4M12 17h.01"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-minus" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+      <symbol id="i-sort" viewBox="0 0 24 24"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></symbol>
+      <symbol id="i-sort-asc" viewBox="0 0 24 24"><path d="m7 9 5-5 5 5"/><path d="M12 4v16"/></symbol>
+      <symbol id="i-sort-desc" viewBox="0 0 24 24"><path d="m7 15 5 5 5-5"/><path d="M12 20V4"/></symbol>
+      <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></symbol>
+    </defs>
+  </svg>
+
+  <a class="skip-link" href="#comparador">Saltar al comparador</a>
+
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="/" aria-label="Dolarito, inicio">
+        <img class="brand__mark" src="img/brand/logo.png" alt="" width="32" height="32" />
+        <span class="brand__name">Dolar<span class="brand__accent">ito</span></span>
+      </a>
+
+      <div class="topbar__actions">
+        <button id="btnRefresh" class="btn btn--primary" type="button">
+          <svg class="icon" aria-hidden="true"><use href="#i-refresh" /></svg>
+          <span class="btn__label">Actualizar</span>
+        </button>
+        <button id="btnTheme" class="btn btn--icon" type="button" aria-label="Cambiar tema">
+          <svg class="icon icon--sun" aria-hidden="true"><use href="#i-sun" /></svg>
+          <svg class="icon icon--moon" aria-hidden="true"><use href="#i-moon" /></svg>
+        </button>
+      </div>
+    </div>
+    <div id="progress" class="progress" hidden><div class="progress__bar"></div></div>
+  </header>
+
+  <main class="container main" id="main">
+    <section class="hero" aria-labelledby="pageTitle">
+      <h1 id="pageTitle">Tipo de cambio del dólar en bancos de Bolivia</h1>
+      <p class="hero__lead">
+        Compara la pizarra de cada banco con el oficial del BCB. Los datos se consultan directamente en los sitios web de cada entidad y se actualizan solos.
+      </p>
+      <div id="syncStatus" class="sync" role="status">
+        <span class="sync__dot" aria-hidden="true"></span>
+        <span class="sync__text">Cargando cotizaciones…</span>
+      </div>
+    </section>
+
+    <div id="alertRegion"></div>
+
+    <!-- Indicadores -->
+    <section class="kpis" aria-label="Resumen del mercado">
+      <article class="kpi kpi--official">
+        <header class="kpi__head">
+          <span class="kpi__label">Oficial BCB</span>
+          <span class="logo logo--sm" data-short="BCB" aria-hidden="true"><img src="img/logos/bcb.png" alt="" /></span>
+        </header>
+        <p class="kpi__value" id="kpiOfficial"><span class="skeleton skeleton--value"></span></p>
+        <p class="kpi__meta" id="kpiOfficialMeta">&nbsp;</p>
+      </article>
+
+      <article class="kpi">
+        <header class="kpi__head">
+          <span class="kpi__label">Mejor para comprar USD</span>
+          <svg class="icon kpi__icon" aria-hidden="true"><use href="#i-down" /></svg>
+        </header>
+        <p class="kpi__value" id="kpiBestSell"><span class="skeleton skeleton--value"></span></p>
+        <p class="kpi__meta" id="kpiBestSellMeta">&nbsp;</p>
+      </article>
+
+      <article class="kpi">
+        <header class="kpi__head">
+          <span class="kpi__label">Mejor para vender USD</span>
+          <svg class="icon kpi__icon" aria-hidden="true"><use href="#i-up" /></svg>
+        </header>
+        <p class="kpi__value" id="kpiBestBuy"><span class="skeleton skeleton--value"></span></p>
+        <p class="kpi__meta" id="kpiBestBuyMeta">&nbsp;</p>
+      </article>
+
+      <article class="kpi">
+        <header class="kpi__head">
+          <span class="kpi__label">Brecha promedio</span>
+          <svg class="icon kpi__icon" aria-hidden="true"><use href="#i-spread" /></svg>
+        </header>
+        <p class="kpi__value" id="kpiSpread"><span class="skeleton skeleton--value"></span></p>
+        <p class="kpi__meta" id="kpiSpreadMeta">&nbsp;</p>
+      </article>
+
+      <article class="kpi kpi--digital">
+        <header class="kpi__head">
+          <span class="kpi__label">Mejor dólar digital <span class="tag">USDT</span></span>
+          <svg class="icon kpi__icon" aria-hidden="true"><use href="#i-down" /></svg>
+        </header>
+        <p class="kpi__value" id="kpiDigital"><span class="skeleton skeleton--value"></span></p>
+        <p class="kpi__meta" id="kpiDigitalMeta">&nbsp;</p>
+      </article>
+    </section>
+
+    <div class="layout">
+      <!-- Calculadora -->
+      <aside class="card calc" aria-labelledby="calcTitle">
+        <h2 id="calcTitle" class="card__title">Calculadora</h2>
+
+        <fieldset class="segmented">
+          <legend class="visually-hidden">Operación</legend>
+          <input type="radio" name="op" id="opBuyUsd" value="buyUsd" checked />
+          <label for="opBuyUsd">Quiero comprar US$</label>
+          <input type="radio" name="op" id="opSellUsd" value="sellUsd" />
+          <label for="opSellUsd">Quiero vender US$</label>
+        </fieldset>
+
+        <div class="field">
+          <label for="amountInput" class="field__label">Monto en dólares</label>
+          <div class="input-affix">
+            <span class="input-affix__prefix" aria-hidden="true">US$</span>
+            <input id="amountInput" type="text" inputmode="decimal" value="100" autocomplete="off" aria-describedby="amountHelp" />
+          </div>
+          <div class="chips" role="group" aria-label="Montos rápidos">
+            <button type="button" class="chip" data-amount="100">100</button>
+            <button type="button" class="chip" data-amount="500">500</button>
+            <button type="button" class="chip" data-amount="1000">1.000</button>
+            <button type="button" class="chip" data-amount="5000">5.000</button>
+          </div>
+          <p id="amountHelp" class="field__help">La tabla se ordena según tu operación.</p>
+        </div>
+
+        <div class="result" id="calcResult" aria-live="polite">
+          <p class="result__label" id="calcResultLabel">Pagas como mínimo</p>
+          <p class="result__value" id="calcResultValue">—</p>
+          <p class="result__bank" id="calcResultBank">&nbsp;</p>
+          <dl class="result__details">
+            <div><dt>Al oficial BCB</dt><dd id="calcOfficial">—</dd></div>
+            <div><dt id="calcWorstLabel">Peor opción</dt><dd id="calcWorst">—</dd></div>
+            <div><dt>Mejor digital</dt><dd id="calcDigital">—</dd></div>
+          </dl>
+          <p class="result__saving" id="calcSaving" hidden></p>
+        </div>
+      </aside>
+
+      <div class="layout__main">
+      <!-- Comparador -->
+      <section class="card comparator" id="comparador" aria-labelledby="comparatorTitle" tabindex="-1">
+        <header class="card__head">
+          <div>
+            <h2 id="comparatorTitle" class="card__title">Comparador de bancos</h2>
+            <p class="card__subtitle" id="comparatorSubtitle">Ordenado por el mejor precio para tu operación</p>
+          </div>
+          <label class="search">
+            <span class="visually-hidden">Buscar banco</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-search" /></svg>
+            <input id="searchInput" type="search" placeholder="Buscar banco" autocomplete="off" />
+          </label>
+        </header>
+
+        <div class="table-wrap">
+          <table class="rates">
+            <caption class="visually-hidden">Tipo de cambio por banco, en bolivianos por dólar</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="col-bank"><button class="sort" type="button" data-sort="name">Banco<svg class="icon" aria-hidden="true"><use href="#i-sort" /></svg></button></th>
+                <th scope="col" class="num">
+                  <button class="sort" type="button" data-sort="buy">Compra<svg class="icon" aria-hidden="true"><use href="#i-sort" /></svg></button>
+                  <span class="th-hint">Te pagan</span>
+                </th>
+                <th scope="col" class="num">
+                  <button class="sort" type="button" data-sort="sell">Venta<svg class="icon" aria-hidden="true"><use href="#i-sort" /></svg></button>
+                  <span class="th-hint">Te cobran</span>
+                </th>
+                <th scope="col" class="num">
+                  <button class="sort" type="button" data-sort="total"><span class="js-total-header">Pagas</span><svg class="icon" aria-hidden="true"><use href="#i-sort" /></svg></button>
+                  <span class="th-hint js-total-hint">por US$ 100</span>
+                </th>
+                <th scope="col" class="col-status">Estado</th>
+              </tr>
+            </thead>
+            <tbody id="ratesBody">
+              <tr class="row--loading"><td colspan="5"><span class="skeleton"></span></td></tr>
+              <tr class="row--loading"><td colspan="5"><span class="skeleton"></span></td></tr>
+              <tr class="row--loading"><td colspan="5"><span class="skeleton"></span></td></tr>
+            </tbody>
+          </table>
+          <p id="emptyState" class="empty" hidden>No hay bancos que coincidan con “<span id="emptyQuery"></span>”.</p>
+        </div>
+
+        <footer class="card__foot">
+          <svg class="icon" aria-hidden="true"><use href="#i-info" /></svg>
+          <span>Montos en bolivianos (Bs) por dólar. Las variaciones (▲▼) comparan con el último día registrado.</span>
+        </footer>
+      </section>
+
+      <!-- Dólar digital -->
+      <section class="card digital" id="digital" aria-labelledby="digitalTitle">
+        <header class="card__head">
+          <div>
+            <h2 id="digitalTitle" class="card__title">Dólar digital</h2>
+            <p class="card__subtitle" id="digitalSubtitle">USDT, billeteras y cuentas digitales en dólares</p>
+          </div>
+        </header>
+        <div class="table-wrap">
+          <table class="rates">
+            <caption class="visually-hidden">Tipo de cambio en plataformas digitales, en bolivianos por dólar</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="col-bank">Plataforma</th>
+                <th scope="col" class="num">Compra<span class="th-hint">Te pagan</span></th>
+                <th scope="col" class="num">Venta<span class="th-hint">Te cobran</span></th>
+                <th scope="col" class="num"><span class="js-total-header">Pagas</span><span class="th-hint js-total-hint">por US$ 100</span></th>
+                <th scope="col" class="col-status">Estado</th>
+              </tr>
+            </thead>
+            <tbody id="digitalBody">
+              <tr class="row--loading"><td colspan="5"><span class="skeleton"></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <footer class="card__foot">
+          <svg class="icon" aria-hidden="true"><use href="#i-alert" /></svg>
+          <span>No son bancos regulados por ASFI. Los mercados P2P (Binance, Bybit, OKX, Bitget) cotizan USDT, una stablecoin atada al dólar, entre particulares: se muestra la mediana de los 5 mejores anuncios. El Dorado incluye sus comisiones. Los valores con ≈ son estimaciones, no tasas publicadas. El precio final puede variar según el monto y el medio de pago.</span>
+        </footer>
+      </section>
+      </div>
+
+    </div>
+
+    <!-- Historial -->
+    <section class="card history" aria-labelledby="historyTitle">
+      <header class="card__head">
+        <div>
+          <h2 id="historyTitle" class="card__title">Evolución</h2>
+          <p class="card__subtitle">Promedio de los bancos y oficial del BCB, últimos 30 días</p>
+        </div>
+        <ul class="legend" aria-hidden="true">
+          <li><span class="legend__swatch legend__swatch--sell"></span>Venta prom.</li>
+          <li><span class="legend__swatch legend__swatch--official"></span>Oficial</li>
+          <li><span class="legend__swatch legend__swatch--buy"></span>Compra prom.</li>
+        </ul>
+      </header>
+      <div id="chart" class="chart"></div>
+    </section>
+
+    <!-- Ayuda -->
+    <section class="faq" aria-labelledby="faqTitle">
+      <h2 id="faqTitle" class="section-title">Cómo leer estos datos</h2>
+      <div class="faq__grid">
+        <details>
+          <summary>¿Qué es “compra” y “venta”?</summary>
+          <p>Se miran desde el banco. <strong>Compra</strong> es lo que el banco te paga por cada dólar que le vendes. <strong>Venta</strong> es lo que te cobra por cada dólar que le compras. Si quieres conseguir dólares, busca la venta más baja; si quieres cambiarlos a bolivianos, la compra más alta.</p>
+        </details>
+        <details>
+          <summary>¿Qué es el tipo de cambio oficial?</summary>
+          <p>Es el valor que publica el Banco Central de Bolivia (BCB) cada día hábil. Sirve de referencia para contratos, impuestos y operaciones oficiales; los bancos fijan su propia pizarra alrededor de ese valor.</p>
+        </details>
+        <details>
+          <summary>¿Cada cuánto se actualiza?</summary>
+          <p>El servidor consulta los sitios de los bancos y del BCB automáticamente cada <span id="faqInterval">30</span> minutos, y esta página se refresca sola. También puedes forzar una consulta con el botón “Actualizar”.</p>
+        </details>
+        <details>
+          <summary>¿Qué es el “dólar digital”?</summary>
+          <p>Son alternativas a los bancos para comprar o vender dólares: mercados <strong>P2P</strong> de USDT entre personas (Binance, Bybit, OKX y Bitget), la app <strong>El Dorado</strong> y billeteras en dólares como <strong>Takenos</strong>, <strong>Wallbit</strong>, <strong>PE$O</strong>, <strong>Meru</strong> o <strong>Airtm</strong>. La tasa de Airtm sale de su convertidor público; Wallbit aparece cuando configuras tu API key personal; PE$O solo muestra su cotización dentro de su app, por eso no tiene valor aquí. Meru tampoco la publica: el valor que ves (marcado con ≈) es una <strong>estimación</strong> calculada con el precio P2P en vivo y el margen que se observó en su app.</p>
+        </details>
+        <details>
+          <summary>¿Qué significan los estados?</summary>
+          <p><strong>Al día</strong>: el valor se confirmó en la última consulta. <strong>Desactualizado</strong>: el sitio del banco no respondió y se muestra el último valor conocido. <strong>Sin publicación</strong>: la entidad no publica su cotización en internet. <strong>Estimado</strong>: valor aproximado calculado a partir de otras fuentes; no participa en “mejor opción” ni en los promedios.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Información referencial obtenida de los sitios oficiales de cada entidad y del <a href="https://www.bcb.gob.bo/" target="_blank" rel="noopener">BCB</a>. Confirma la cotización con tu banco antes de operar.</p>
+    </div>
+  </footer>
+
+  <div id="toasts" class="toasts" aria-live="polite" aria-atomic="false"></div>
+
+  <noscript><p class="container">Activa JavaScript para ver las cotizaciones.</p></noscript>
+</body>
+</html>
