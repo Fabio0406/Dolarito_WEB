@@ -1,5 +1,5 @@
 {
-  "name": "monitor-dolar-bo",
+  "name": "dolarito-servidor",
   "version": "2.0.0",
   "description": "Dolarito: servidor que monitorea el tipo de cambio del dólar en los bancos de Bolivia y el BCB",
   "main": "src/server.js",

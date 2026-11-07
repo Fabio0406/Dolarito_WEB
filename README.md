@@ -4,7 +4,7 @@ Servidor (Node.js) que **consulta cada 30 minutos** el tipo de cambio del dólar
 oficial del BCB y las plataformas digitales (P2P de USDT y billeteras). Calcula los mejores precios y
 promedios, guarda un historial diario y lo expone en una **API REST** y una **página web**.
 
-Es la fuente de datos principal de la app móvil [`Dolarito`](../Dolarito_Mobile). La app también funciona
+Es la fuente de datos principal de la [app móvil de Dolarito](../MonitosMovil). La app también funciona
 sin este servidor (consulta desde el teléfono), pero con él gasta menos datos y batería, tiene historial
 completo e incluye Wallbit.
 
@@ -179,10 +179,10 @@ Extrae con `rateAfter(texto, 'Etiqueta')` y acota con `section()` cuando la etiq
 **Después de cada cambio:**
 
 1. Agrega el texto real del sitio a `test/parse.test.js` y corre `npm test`.
-2. **Replica el cambio en la app:** `MonitosMovil/lib/features/rates/data/device/scraping/sources.dart`, que
+2. **Replica el cambio en la app móvil de Dolarito:** `lib/features/rates/data/device/scraping/sources.dart`, que
    usa la misma lógica en el modo autónomo, y su prueba en `test/features/device_mode_test.dart`.
-3. Si es una entidad nueva, agrega su logo en `public/img/logos/<id>.png` y en
-   `MonitosMovil/assets/logos/<id>.png`.
+3. Si es una entidad nueva, agrega su logo en `public/img/logos/<id>.png` y, en la app móvil, en
+   `assets/logos/<id>.png`.
 
 ## Activar Wallbit
 
@@ -213,8 +213,8 @@ Calibración actual (`MERU_CALIBRATION` en `src/scrapers/sources.js`), 17 oct 20
 1. Anota la compra y la venta que muestra la app de Meru.
 2. En el mismo minuto, corre `npm run scrape`.
 3. Copia la mediana P2P de ese momento en `reference` y lo que viste en Meru en `observed`.
-4. Actualiza también `meruObserved` y `meruReference` en
-   `MonitosMovil/lib/features/rates/data/device/scraping/sources.dart`.
+4. Actualiza también `meruObserved` y `meruReference` en la app móvil de Dolarito:
+   `lib/features/rates/data/device/scraping/sources.dart`.
 
 Conviene hacerlo si la estimación se aleja de lo que muestra la app de Meru, que puede cambiar su margen sin
 aviso.
