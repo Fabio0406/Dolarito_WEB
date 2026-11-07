@@ -4,7 +4,7 @@ Servidor (Node.js) que **consulta cada 30 minutos** el tipo de cambio del dólar
 oficial del BCB y las plataformas digitales (P2P de USDT y billeteras). Calcula los mejores precios y
 promedios, guarda un historial diario y lo expone en una **API REST** y una **página web**.
 
-Es la fuente de datos principal de la [app móvil de Dolarito](../MonitosMovil). La app también funciona
+Es la fuente de datos principal de la [app móvil de Dolarito](https://github.com/Fabio0406/DolaritoApp). La app también funciona
 sin este servidor (consulta desde el teléfono), pero con él gasta menos datos y batería, tiene historial
 completo e incluye Wallbit.
 
